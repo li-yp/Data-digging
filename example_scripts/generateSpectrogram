@@ -1,0 +1,17 @@
+# generates the spectrogram for a given wav file (named a.wav in this script)
+
+import matplotlib.pyplot as plt
+import matplotlib
+from scipy.io.wavfile import read
+
+audio_name = 'a.wav'
+pic_name = 'a.png'
+
+fs, signal = read(audio_name)
+
+plt.figure(figsize=(14, 8))
+ax = matplotlib.axes.Axes(plt.gcf(), [0, 0, 1, 1], yticks=[], xticks=[], frame_on=False)
+plt.gcf().delaxes(plt.gca())
+plt.gcf().add_axes(ax)
+plt.specgram(signal, Fs=fs, NFFT=512, noverlap=256, interpolation='nearest')
+plt.savefig(pic_name)
